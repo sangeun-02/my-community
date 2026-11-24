@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
@@ -10,7 +8,6 @@ import PageLayout from '../components/common/page-layout';
 import PostCard from '../components/ui/post-card';
 import PsSymbols from '../components/ui/ps-symbols';
 import { supabase } from '../lib/supabase';
-import { useAuth } from '../hooks/use-auth';
 import { CATEGORIES } from '../utils/categories';
 
 /**
@@ -20,7 +17,6 @@ import { CATEGORIES } from '../utils/categories';
  * <Route path="/" element={ <PostListPage /> } />
  */
 function PostListPage() {
-  const { user } = useAuth();
   const [category, setCategory] = useState('all');
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -54,9 +50,10 @@ function PostListPage() {
         sx={ {
           position: 'relative',
           overflow: 'hidden',
-          p: { xs: 3, md: 5 },
+          px: { xs: 3, md: 6 },
+          py: { xs: 3.5, md: 5 },
           mb: 3,
-          borderRadius: 6,
+          borderRadius: 3,
           color: '#fff',
           background: 'linear-gradient(135deg, #0070D1 0%, #003791 100%)',
           boxShadow: '0 16px 40px rgba(0,55,145,0.25)',
@@ -70,12 +67,9 @@ function PostListPage() {
           <Box sx={ { mt: 1, fontSize: { xs: '1.8rem', md: '2.8rem' }, fontWeight: 900, lineHeight: 1.2 } }>
             오늘은 어떤 게임<br />플레이했나요?
           </Box>
-          <Box sx={ { mt: 1, mb: 2.5, fontSize: { xs: '0.95rem', md: '1.1rem' }, opacity: 0.9, lineHeight: 1.5 } }>
+          <Box sx={ { mt: 1, fontSize: { xs: '0.95rem', md: '1.1rem' }, opacity: 0.9, lineHeight: 1.5 } }>
             공략도 나누고, 트로피 인증도 하고, 모르는 건 물어보세요 🎮
           </Box>
-          <Button component={ RouterLink } to={ user ? '/write' : '/login' } variant="contained" size="large" sx={ { bgcolor: '#fff', color: 'primary.main', '&:hover': { bgcolor: '#EAF3FF' } } }>
-            { user ? '✏️ 새 글 쓰기' : '지금 합류하기' }
-          </Button>
         </Box>
       </Box>
 
